@@ -1,0 +1,112 @@
+/* 滚动条 */
+
+/*滚动条宽度*/
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 6px;
+  height: 6px;
+}
+
+/* 轨道样式 */
+::-webkit-scrollbar-track {}
+
+
+/* Handle样式 */
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: rgba(194, 194, 194, 0.4);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 6px;
+  background: rgba(194, 194, 194, 0.8);
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  background-color: rgb(194, 194, 194);
+}
+
+/*hover到滚动条上*/
+::-webkit-scrollbar-thumb:vertical:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/*滚动条按下*/
+::-webkit-scrollbar-thumb:vertical:active {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+// 溢出隐藏
+.single-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 多行溢出隐藏
+.multi-ellipsis-2 {
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.common-title {
+  position: relative;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 50px;
+  color: #21293C;
+  height: 50px;
+  width: 100%;
+  padding: 0 24px;
+  border-bottom: 1px solid #edeeef;
+
+  .iconfont {
+    position: absolute;
+    left: 24px;
+    top: 9px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: background .3s;
+    font-size: 22px;
+
+    &:hover {
+      background: rgba(75, 88, 124, 0.08);
+    }
+  }
+
+  .title {
+    text-align: center;
+  }
+}
+
+
+.preview-title {
+  font-size: 24px;
+  padding: 24px 32px;
+}
+
+.preview-time {
+  font-size: 13px;
+  color: #67788A;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+}
+
+.md-editor-preview-wrapper {
+  padding: 10px 32px !important;
+}
