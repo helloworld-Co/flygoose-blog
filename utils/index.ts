@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-01-15 11:51:04
  * @Description: 请填写文件描述
  */
-const phoneNumReg = /^1[34578]\d{9}$/
+const phoneNumReg = /^1[3456789]\d{9}$/
 
 export const checkData = {
   phoneNum(num) {
