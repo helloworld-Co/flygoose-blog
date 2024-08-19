@@ -14,9 +14,9 @@
       {{ state.title }}
     </div>
 
-    <div class="preview-time" >
+    <div class="preview-time">
       {{ dayjs(state.time).format('YYYY-MM-DD hh:mm:ss') }}
-      <li style="margin-left: 10px;" >阅读: {{ state.readCount }}</li>
+      <li style="margin-left: 10px">阅读: {{ state.readCount }}</li>
     </div>
     <MdPreview
       editor-id="preview-only"
@@ -67,7 +67,7 @@ const getDetail = async () => {
   const { data } = await useFetch('/api/special/getSectionDetail', {
     method: 'post',
     body: {
-      sectionId: route.query.id
+      sectionId: Number(route.query.id)
     }
   })
   commonStore.setCurrentSectionId(route.query.id as string)

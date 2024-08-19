@@ -25,7 +25,7 @@ const getSpecialDetail = async () => {
   const { data } = await useFetch('/api/special/getSpecialDetail', {
     method: 'post',
     body: {
-      specialId: route.params.id || route.query.specialId
+      specialId: Number(route.params.id) || Number(route.query.specialId)
     }
   })
   specialList.value = data.value?.list || []

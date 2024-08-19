@@ -46,6 +46,7 @@ const state = reactive<Record<string, any>>({
   typeList: []
 })
 const pageNum = ref<number>(1)
+const config = useRuntimeConfig()
 const load = async () => {
   if (!state.hasMore) return
   const { data } = await useFetch('/api/blog/getCateBlogList', {

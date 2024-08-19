@@ -58,7 +58,7 @@ const getDetail = async () => {
   const { data } = await useFetch('/api/blog/getBlogDetail', {
     method: 'post',
     body: {
-      id: route.params.id
+      id: Number(route.params.id)
     }
   })
   state.content = data.value?.blog.content || ''

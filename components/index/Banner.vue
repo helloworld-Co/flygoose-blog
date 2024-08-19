@@ -10,7 +10,12 @@
     <el-carousel :interval="5000" arrow="always" height="190px">
       <el-carousel-item v-for="item in state.bannerList" :key="item">
         <!-- config.public.ASSETS_URL +  -->
-        <img :src="item.url" alt="banner" @click="jump(item)" />
+        <img
+          :src="item.url"
+          alt="banner"
+          @click="jump(item)"
+          style="width: 100%; height: 100%"
+        />
       </el-carousel-item>
     </el-carousel>
   </div>

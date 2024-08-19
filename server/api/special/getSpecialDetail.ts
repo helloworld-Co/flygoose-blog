@@ -24,10 +24,12 @@ type Result = {
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
-  const formData = new FormData()
   const body = await readBody(event)
+  let params = {
+    specialId: ''
+  }
   if (body && body.specialId) {
-    formData.append('specialId', body.specialId)
+    params.specialId = body.specialId
   } else {
     return sendError(
       event,
@@ -37,12 +39,11 @@ export default defineEventHandler(async (event) => {
       })
     )
   }
-  console.log(body.specialId, 'dd')
   const res: Result = await $fetch('/special/getSpecialDetail', {
     method: 'post',
     baseURL: config.public.BASE_URL,
     headers: event.context.headers,
-    body: formData
+    body: params
   })
   return res.data || []
 })

@@ -1,12 +1,16 @@
 import type { Result } from '../special/getSpecialList'
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
-  const formData = new FormData()
   const body = await readBody(event)
+  let params = {
+    pageNum:'',
+    pageSize:'',
+    action:null
+  }
   if (body && body.pageNum && body.pageSize) {
-    formData.append('pageNum', body.pageNum)
-    formData.append('pageSize', body.pageSize)
-    formData.append('action', body.action)
+    params.pageNum = body.pageNum
+    params.pageSize = body.pageSize
+    params.action = body.action
   } else {
     return sendError(
       event,
@@ -20,7 +24,7 @@ export default defineEventHandler(async (event) => {
     method: 'post',
     baseURL: config.public.BASE_URL,
     headers: event.context.headers,
-    body: formData
+    body: params
   })
   return res.data || []
 })

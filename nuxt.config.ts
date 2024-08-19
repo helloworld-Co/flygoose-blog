@@ -98,7 +98,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      BASE_URL: process.env.BASE_URL + '/v1',
+        //  + '/v1'
+      BASE_URL: process.env.BASE_URL + '/api',
       ASSETS_URL: 'http://192.168.168.10:29091'
     }
   }

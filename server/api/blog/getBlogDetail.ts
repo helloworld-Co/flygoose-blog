@@ -11,10 +11,12 @@ type Result = {
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
-  const formData = new FormData()
+  let params = {
+    id:null
+  }
   const body = await readBody(event)
   if (body && body.id) {
-    formData.append('id', body.id)
+    params.id = body.id
   } else {
     return sendError(
       event,
@@ -28,7 +30,7 @@ export default defineEventHandler(async (event) => {
     method: 'post',
     baseURL: config.public.BASE_URL,
     headers: event.context.headers,
-    body: formData
+    body: params
   })
   return res.data || []
 })
