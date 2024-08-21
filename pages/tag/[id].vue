@@ -23,6 +23,7 @@
 </template>
 
 <script lang="ts" setup>
+import request from '@/utils/request'
 const route = useRoute()
 import ArticleItem from '../../components/global/ArticleItem.vue'
 
@@ -33,17 +34,14 @@ const state = reactive({
 })
 const load = async () => {
   if (!state.hasMore) return
-  const { data } = await useFetch('/api/blog/getBlogListByTag', {
-    method: 'post',
-    body: {
-      pageNum: pageNum.value,
-      pageSize: 10,
-      name: route.params.id
-    }
+  const { data }: any = await request.post('/blog/getBlogListByTag', {
+    pageNum: pageNum.value,
+    pageSize: 10,
+    name: route.params.id
   })
   pageNum.value++
-  state.hasMore = data.value?.hasMore as boolean
-  state.list = state.list.concat(data.value?.list || [])
+  state.hasMore = data?.hasMore as boolean
+  state.list = state.list.concat(data?.list || [])
 }
 </script>
 

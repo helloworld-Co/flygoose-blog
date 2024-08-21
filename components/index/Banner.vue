@@ -9,7 +9,6 @@
   <div class="index-banner">
     <el-carousel :interval="5000" arrow="always" height="190px">
       <el-carousel-item v-for="item in state.bannerList" :key="item">
-        <!-- config.public.ASSETS_URL +  -->
         <img
           :src="item.url"
           alt="banner"
@@ -22,12 +21,12 @@
 </template>
 
 <script lang="ts" setup>
-let { data } = await useFetch('/api/site/getBannerList')
-const config = useRuntimeConfig()
+import request from '@/utils/request'
+let { data }: any = await request.post('/site/getBannerList')
 const state = reactive({
   bannerList: []
 })
-state.bannerList = data.value?.list as []
+state.bannerList = data?.list as []
 
 const jump = (item: { targetUrl: string }) => {
   if (!item.targetUrl) return

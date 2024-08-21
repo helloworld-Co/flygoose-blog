@@ -58,19 +58,15 @@
 
 <script lang="ts" setup>
 import { MdCatalog } from 'md-editor-v3'
+import request from '@/utils/request'
 let scrollElement: HTMLElement | undefined = undefined
 if (process.client) {
   scrollElement = document.documentElement
 }
 
-const getList = () => {
-  const { data } = useFetch('/api/site/getFriendLinkList', {
-    method: 'post',
-    body: {}
-  })
-
-  links.value = data.value?.list || []
-  console.log('links.value', links.value)
+const getList = async () => {
+  const { data }: any = await request.post('/site/getFriendLinkList')
+  links.value = data?.list || []
 }
 const links = ref<Record<string, string>[]>([])
 
@@ -84,28 +80,19 @@ const state = reactive({
   }
 })
 const getDetail = async () => {
-  const { data } = await useFetch('/api/site/getSiteInfo', {
-    method: 'post',
-    body: {}
-  })
-  state.copyright = data.value?.copyright || ''
-  state.intro = data.value?.intro || ''
-  state.icp = data.value?.icp || ''
+  const { data }: any = await request.post('/site/getSiteInfo')
+  state.copyright = data?.copyright || ''
+  state.intro = data?.intro || ''
+  state.icp = data?.icp || ''
 }
 
 const getTags = async () => {
-  const { data } = await useFetch('/api/blog/getAllTags', {
-    method: 'post',
-    body: {}
-  })
-  state.tags = data.value || []
+  const { data }: any = await request.post('/blog/getAllTags')
+  state.tags = data || []
 }
 const getNoice = async () => {
-  const { data } = await useFetch('/api/site/getNoticeList', {
-    method: 'post',
-    body: {}
-  })
-  state.noticeInfo = data.value?.list ? data.value?.list[0] : null
+  const { data }: any = await request.post('/site/getNoticeList')
+  state.noticeInfo = data?.list ? data?.list[0] : null
 }
 getNoice()
 getDetail()

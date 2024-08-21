@@ -32,6 +32,7 @@
 </template>
 
 <script lang="ts" setup>
+import request from '@/utils/request'
 const searchVal = ref<string>('')
 const router = useRouter()
 const jumpSearch = () => {
@@ -42,7 +43,7 @@ const jumpSearch = () => {
     }
   })
 }
-let { data } = await useFetch('/api/site/getWebmasterInfo')
+const { data }: any = await request.post('/site/getWebmasterInfo')
 let userInfo = ref({
   job: '',
   intro: '',
@@ -53,11 +54,8 @@ let userInfo = ref({
   avatar: '',
   nicker: ''
 })
-userInfo.value = data.value?.data || {}
+userInfo.value = data || {}
 
-const config = useRuntimeConfig()
-
-// config.public.ASSETS_URL +
 const headerSrc = computed(() => {
   return userInfo.value?.avatar ? userInfo.value.avatar : ''
 })

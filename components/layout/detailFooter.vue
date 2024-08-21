@@ -38,24 +38,21 @@
 
 <script lang="ts" setup>
 import { MdCatalog } from 'md-editor-v3'
+import request from '@/utils/request'
 let scrollElement: HTMLElement | undefined = undefined
 if (process.client) {
   scrollElement = document.documentElement
 }
 
-let { data } = await useFetch('/api/site/getWebmasterInfo')
-
+const { data }: any = await request.post('/site/getWebmasterInfo')
 let userInfo = ref({
   job: '',
   intro: '',
   avatar: '',
   nicker: ''
 })
-userInfo.value = data.value?.data || {}
+userInfo.value = data || {}
 
-const config = useRuntimeConfig()
-
-// config.public.ASSETS_URL +
 const imgSrc = computed(() => {
   return userInfo.value?.avatar ? userInfo.value.avatar : ''
 })
@@ -68,11 +65,8 @@ const state = reactive({
 })
 
 const getTags = async () => {
-  const { data } = await useFetch('/api/blog/getAllTags', {
-    method: 'post',
-    body: {}
-  })
-  state.tags = data.value || []
+  const { data }: any = await request.post('/blog/getAllTags')
+  state.tags = data || []
 }
 getTags()
 </script>

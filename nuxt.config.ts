@@ -13,6 +13,7 @@ export default defineNuxtConfig({
         { name: 'description', content: '开源博客 - helloworld' }
       ],
       link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         {
           rel: 'stylesheet',
           href: '//at.alicdn.com/t/c/font_3420979_f6dbhdrnbpu.css'
@@ -98,9 +99,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-        //  + '/v1'
       BASE_URL: process.env.BASE_URL + '/api',
-      ASSETS_URL: 'http://192.168.168.10:29091'
     }
   }
   // autoImports: {

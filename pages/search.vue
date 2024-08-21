@@ -19,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import request from '@/utils/request'
 import ArticleItem from '../components/global/ArticleItem.vue'
 const route = useRoute()
 
@@ -34,16 +35,13 @@ const state = reactive<Record<string, any>>({
 const pageNum = ref<number>(1)
 const load = async () => {
   if (!state.hasMore) return
-  const { data } = await useFetch('/api/blog/searchBlog', {
-    method: 'post',
-    body: {
-      pageNum: pageNum.value,
-      pageSize: 10,
-      word: route.query.word
-    }
+  const { data }: any = await request.post('/blog/searchBlog', {
+    pageNum: pageNum.value,
+    pageSize: 10,
+    word: route.query.word
   })
   pageNum.value++
-  state.hasMore = data.value?.hasMore as boolean
-  state.list = state.list.concat(data.value?.list || [])
+  state.hasMore = data?.hasMore as boolean
+  state.list = state.list.concat(data?.list || [])
 }
 </script>

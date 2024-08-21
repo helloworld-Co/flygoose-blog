@@ -38,10 +38,7 @@ const props = defineProps<{
     readCount: number
   }
 }>()
-
-const config = useRuntimeConfig()
 const normalImg = '@/assets/images/banner.png'
-// config.public.ASSETS_URL +
 const imgSrc = props.item.cover ? props.item.cover : normalImg
 </script>
 

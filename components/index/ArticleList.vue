@@ -25,6 +25,7 @@
 
 <script lang="ts" setup>
 import ArticleItem from '../global/ArticleItem.vue'
+import request from '@/utils/request'
 const activeKey = ref<string>('0')
 const pageNum = ref<number>(1)
 const state = reactive({
@@ -33,17 +34,14 @@ const state = reactive({
 })
 const load = async () => {
   if (!state.hasMore) return
-  const { data } = await useFetch('/api/blog/getBlogListByAction', {
-    method: 'post',
-    body: {
-      pageNum: pageNum.value,
-      pageSize: 10,
-      action: Number(activeKey.value)
-    }
+  const { data }: any = await request.post('/blog/getBlogListByAction', {
+    pageNum: pageNum.value,
+    pageSize: 10,
+    action: Number(activeKey.value)
   })
   pageNum.value++
-  state.hasMore = data.value?.hasMore as boolean
-  state.list = state.list.concat(data.value?.list || [])
+  state.hasMore = data?.hasMore as boolean
+  state.list = state.list.concat(data?.list || [])
 }
 
 const setActiveKey = () => {

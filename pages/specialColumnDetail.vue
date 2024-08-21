@@ -32,9 +32,8 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs'
 import SpecialNav from '@/components/special/specialNav.vue'
-
+import request from '@/utils/request'
 import { useCommon } from '@/stores/index'
-
 import { MdPreview } from 'md-editor-v3'
 import 'md-editor-v3/lib/preview.css'
 
@@ -64,17 +63,14 @@ const showDrawer = () => {
   state.drawer = true
 }
 const getDetail = async () => {
-  const { data } = await useFetch('/api/special/getSectionDetail', {
-    method: 'post',
-    body: {
-      sectionId: Number(route.query.id)
-    }
+  const { data }: any = await request.post('/special/getSectionDetail', {
+    sectionId: Number(route.query.id)
   })
   commonStore.setCurrentSectionId(route.query.id as string)
-  state.content = data.value?.content || ''
-  state.title = data.value?.title || ''
-  state.time = data.value?.updateTime || ''
-  state.readCount = data.value?.readCount || 0
+  state.content = data?.content || ''
+  state.title = data?.title || ''
+  state.time = data?.updateTime || ''
+  state.readCount = data?.readCount || 0
 }
 getDetail()
 </script>

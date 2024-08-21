@@ -1,7 +1,7 @@
-import Qs from 'qs'
-import CryptoJS from 'crypto-js'
+// import Qs from 'qs'
+// import CryptoJS from 'crypto-js'
 import { getToken, delToken } from '@/hooks/useToken'
-import { getUuid } from '@/hooks/useUuid'
+// import { getUuid } from '@/hooks/useUuid'
 
 type CommonObject = Record<string, unknown>
 
@@ -64,14 +64,14 @@ const defaultOption = {
   headers: {
     Authorization: '',
     token: '',
-    ts: (+new Date() / 1000) | 0,
-    sign: '',
-    'Content-Type': 'application/x-www-form-urlencoded',
-    deviceType: 'pc'
+    // ts: (+new Date() / 1000) | 0,
+    // sign: '',
+    // 'Content-Type': 'application/x-www-form-urlencoded',
+    // deviceType: 'pc'
   }
 }
 
-const fetch = (url: string, options?: CommonObject): Promise<CommonObject> => {
+const fetch = (url: string, options?: CommonObject): Promise<ResponseConfig> => {
   const { $router, $config } = useNuxtApp()
   const reqUrl = $config.public.BASE_URL + url
   const p: CommonObject = {
@@ -80,35 +80,35 @@ const fetch = (url: string, options?: CommonObject): Promise<CommonObject> => {
   }
 
   // 加密参数
-  const originData = options.body || options.params || {}
+  const originData = options?.body || options?.params || {}
   const sortData = getSortObj(originData)
 
   let paramsData = JSON.stringify(sortData)
   if (p.method === 'get') {
     Object.assign(p, { params: sortData })
   } else {
-    const qsData = Qs.stringify(sortData)
+    const qsData = JSON.stringify(sortData)
     Object.assign(p, { body: qsData })
     paramsData = qsData
   }
-  const encryStr = CryptoJS.MD5(decodeURIComponent(paramsData)).toString()
+//   const encryStr = CryptoJS.MD5(decodeURIComponent(paramsData)).toString()
 
   const Token = getToken()
-  Object.assign(p.headers, {
+  Object.assign(p.headers as object, {
     Authorization: Token ? `Bearer ${Token}` : '',
     token: Token || '',
-    ts: (+new Date() / 1000) | 0,
-    sign: encryStr,
-    uuid: getUuid()
+    // ts: (+new Date() / 1000) | 0,
+    // sign: encryStr,
+    // uuid: getUuid()
   })
 
   return new Promise((resolve, reject) => {
     $fetch(reqUrl, p)
-      .then((res: CommonObject) => {
-        const code = res.code || 0
+      .then((res) => {
+        const code = (res as ResponseConfig).code || 0
         if (code === CodeConfig.CodeSuc) {
           // 成功
-          resolve(res)
+          resolve(res as ResponseConfig)
           return
         }
 

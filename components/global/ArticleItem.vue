@@ -47,9 +47,6 @@ const props = defineProps<{
     publishTime: string
   }
 }>()
-
-const config = useRuntimeConfig()
-// config.public.ASSETS_URL +
 const imgSrc = props.item?.thumbnail ? props.item.thumbnail : ''
 </script>
 

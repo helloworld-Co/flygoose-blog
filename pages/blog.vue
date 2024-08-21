@@ -21,12 +21,11 @@
 </template>
 
 <script setup lang="ts">
+import request from '@/utils/request'
 const getTypeList = async () => {
-  const { data } = await useFetch('/api/blog/getCateList', {
-    method: 'post'
-  })
-  state.cateId = data.value?.data ? data.value.data[0].id : null
-  state.typeList = data.value?.data || []
+  const { data }: any = await request.post('/blog/getCateList')
+  state.cateId = data ? data[0].id : null
+  state.typeList = data || []
   load()
 }
 
@@ -46,20 +45,16 @@ const state = reactive<Record<string, any>>({
   typeList: []
 })
 const pageNum = ref<number>(1)
-const config = useRuntimeConfig()
 const load = async () => {
   if (!state.hasMore) return
-  const { data } = await useFetch('/api/blog/getCateBlogList', {
-    method: 'post',
-    body: {
-      pageNum: pageNum.value,
-      pageSize: 10,
-      cateId: state.cateId
-    }
+  const { data }: any = await request.post('/blog/getCateBlogList', {
+    pageNum: pageNum.value,
+    pageSize: 10,
+    cateId: state.cateId
   })
   pageNum.value++
-  state.hasMore = data.value?.hasMore as boolean
-  state.list = state.list.concat(data.value?.list || [])
+  state.hasMore = data?.hasMore as boolean
+  state.list = state.list.concat(data?.list || [])
 }
 </script>
 

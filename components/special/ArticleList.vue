@@ -14,6 +14,7 @@
 
 <script lang="ts" setup>
 import SpecialItem from '../global/SpecialItem.vue'
+import request from '@/utils/request'
 
 let currentPage = ref<number>(1)
 const state = reactive({
@@ -22,15 +23,12 @@ const state = reactive({
 })
 const load = async () => {
   if (!state.hasMore) return
-  const { data } = await useFetch('/api/special/getSpecialList', {
-    method: 'post',
-    body: {
-      pageNum: currentPage.value,
-      pageSize: 10
-    }
+  const { data }: any = await request.post('/special/getSpecialList', {
+    pageNum: currentPage.value,
+    pageSize: 10
   })
   currentPage.value++
-  state.hasMore = data.value?.hasMore as boolean
-  state.list = state.list.concat(data.value?.list || [])
+  state.hasMore = data?.hasMore as boolean
+  state.list = state.list.concat(data?.list || [])
 }
 </script>

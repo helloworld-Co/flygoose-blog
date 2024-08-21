@@ -17,18 +17,16 @@
 <script lang="ts" setup>
 import type { specialItem } from '@/server/api/special/getSpecialDetail'
 import { useCommon } from '@/stores/index'
+import request from '@/utils/request'
 const route = useRoute()
 const router = useRouter()
 const commonStore = useCommon()
 let specialList = ref<specialItem[]>([])
 const getSpecialDetail = async () => {
-  const { data } = await useFetch('/api/special/getSpecialDetail', {
-    method: 'post',
-    body: {
-      specialId: Number(route.params.id) || Number(route.query.specialId)
-    }
+  const { data }: any = await request.post('/special/getSpecialDetail', {
+    specialId: Number(route.params.id) || Number(route.query.specialId)
   })
-  specialList.value = data.value?.list || []
+  specialList.value = data?.list || []
 }
 
 const jump = (item: specialItem) => {

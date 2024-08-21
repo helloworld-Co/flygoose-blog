@@ -24,6 +24,7 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs'
 import type { specialItem } from '@/server/api/special/getSpecialDetail'
+import request from '@/utils/request'
 
 const router = useRouter()
 const route = useRoute()
@@ -34,13 +35,10 @@ const goback = () => {
 let specialList = ref<specialItem[]>([])
 
 const getSpecialDetail = async () => {
-  const { data } = await useFetch('/api/special/getSpecialDetail', {
-    method: 'post',
-    body: {
-      specialId: Number(route.params.id)
-    }
+  const { data }: any = await request.post('/special/getSpecialDetail', {
+    specialId: Number(route.params.id)
   })
-  specialList.value = data.value?.list || []
+  specialList.value = data?.list || []
 }
 
 getSpecialDetail()

@@ -40,7 +40,8 @@
 </template>
 
 <script setup lang="ts">
-let { data } = await useFetch('/api/site/getWebmasterInfo')
+import request from '@/utils/request'
+const { data }: any = await request.post('/site/getWebmasterInfo')
 let userInfo = ref({
   job: '',
   intro: '',
@@ -51,14 +52,11 @@ let userInfo = ref({
   avatar: '',
   nicker: ''
 })
-userInfo.value = data.value?.data || {}
+userInfo.value = data || {}
 
-const config = useRuntimeConfig()
-// config.public.ASSETS_URL +
 const imgSrc = computed(() => {
   return userInfo.value.rewardCode ? userInfo.value.rewardCode : ''
 })
-// config.public.ASSETS_URL +
 const headerSrc = computed(() => {
   return userInfo.value.avatar ? userInfo.value.avatar : ''
 })

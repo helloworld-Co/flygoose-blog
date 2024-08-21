@@ -34,6 +34,8 @@
 </template>
 
 <script lang="ts" setup>
+import request from '@/utils/request'
+
 definePageMeta({
   layout: 'detail-layout'
 })
@@ -55,16 +57,13 @@ const state = reactive({
 })
 
 const getDetail = async () => {
-  const { data } = await useFetch('/api/blog/getBlogDetail', {
-    method: 'post',
-    body: {
-      id: Number(route.params.id)
-    }
+  const { data }: any = await request.post('/blog/getBlogDetail', {
+    id: Number(route.params.id)
   })
-  state.content = data.value?.blog.content || ''
-  state.time = data.value?.blog.updateTime || ''
-  state.title = data.value?.blog.title || ''
-  state.list = (data.value?.list as []) || []
+  state.content = data?.blog.content || ''
+  state.time = data?.blog.updateTime || ''
+  state.title = data?.blog.title || ''
+  state.list = (data?.list as []) || []
 }
 getDetail()
 </script>
