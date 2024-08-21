@@ -21,8 +21,6 @@ git add 后执行 git commit -m 'xxx', xxx 这个代表 commit 的说明
 
 在 `package.json` 平级的目录中 执行 `npm run build` 生产 `.output` 文件 本地的话直接执行 `pm2 start pm2.config.js` 启动服务
 
-##### 注：本地 `pm2` 启动后,在浏览器地址栏通过 `127.0.0.1:58081` 即可访问
-
 需要目录文件
 
 - 生成的.output
@@ -32,6 +30,16 @@ git add 后执行 git commit -m 'xxx', xxx 这个代表 commit 的说明
 // BASE_URL 为接口请求地址
 "build": "cross-env BASE_URL=https://flygoose.helloworld.net nuxi build",
 ```
+
+##### 注：本地 `pm2` 启动后,在浏览器地址栏通过 `127.0.0.1:58081` 即可访问
+
+###### $\color{red}{若未安装 pm2,可执行以下命令进行安装}$
+
+```
+npm install pm2 -g
+```
+
+##### pm2 相关具体可参考 <https://pm2.node.org.cn/>
 
 ### BASE_URL 使用
 
