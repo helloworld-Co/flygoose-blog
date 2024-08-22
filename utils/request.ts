@@ -132,19 +132,19 @@ const fetch = (url: string, options?: CommonObject): Promise<ResponseConfig> => 
 }
 
 export default {
-  get(url: string, params?: CommonObject): Promise<CommonObject> {
-    return fetch(url, { method: 'get', params })
+  get<T = ResponseConfig>(url: string, params?: CommonObject): Promise<T> {
+    return fetch(url, { method: 'get', params }) as Promise<T>
   },
 
-  post(url: string, body?: CommonObject): Promise<CommonObject> {
-    return fetch(url, { method: 'post', body })
+  post<T = ResponseConfig>(url: string, body?: CommonObject): Promise<T> {
+    return fetch(url, { method: 'post', body }) as Promise<T>
   },
 
-  put(url: string, body?: CommonObject): Promise<CommonObject> {
-    return fetch(url, { method: 'put', body })
+  put<T = ResponseConfig>(url: string, body?: CommonObject): Promise<T> {
+    return fetch(url, { method: 'put', body }) as Promise<T>
   },
 
-  delete(url: string, body?: CommonObject): Promise<CommonObject> {
-    return fetch(url, { method: 'delete', body })
+  delete<T = ResponseConfig>(url: string, body?: CommonObject): Promise<T> {
+    return fetch(url, { method: 'delete', body }) as Promise<T>
   }
 }

@@ -14,7 +14,11 @@
     <a-tab-pane key="0" tab="最新"> </a-tab-pane>
     <a-tab-pane key="1" tab="热门"> </a-tab-pane>
   </a-tabs>
-  <div v-infinite-scroll="load" :infinite-scroll-immediate="false">
+  <div
+    v-infinite-scroll="load"
+    :infinite-scroll-immediate="false"
+    infinite-scroll-distance="10"
+  >
     <ArticleItem
       v-for="(item, index) in state.list"
       :key="index"
