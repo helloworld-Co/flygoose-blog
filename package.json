@@ -3,7 +3,7 @@
   "scripts": {
     "local": "cross-env BASE_URL=http://192.168.101.36:29090 nuxi dev",
     "dev": "cross-env BASE_URL=https://test-blog.helloworld.net nuxi dev",
-    "build": "cross-env BASE_URL=https://flygoose.helloworld.net nuxi build",
+    "build": "cross-env BASE_URL=https://flygoose-blog.helloworld.net nuxi build",
     "build_test": "cross-env BASE_URL=https://test-blog.helloworld.net nuxi build",
     "start": "node .output/server/index.mjs",
     "allupdate": "yarn upgrade-interactive",
