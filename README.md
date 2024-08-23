@@ -1,5 +1,15 @@
 # Hello-world Nuxt 3 Starter
 
+## 飞鹅周边 (可访问一下地址访问体验)
+
+##### 飞鹅官网 - flygoose.helloworld.net
+
+##### 飞鹅博客 - flygoose-blog.helloworld.net
+
+##### 飞鹅管理系统 - flygoose-admin.helloworld.net
+
+##### helloworld 开发者社区 - www.helloworld.net
+
 ## 代码命名规范
 
 - 文件夹小写，多个单词用连字符
