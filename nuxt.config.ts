@@ -22,7 +22,7 @@ export default defineNuxtConfig({
       // script: [{ src: 'https://at.alicdn.com/t/font_3420979_o8r3ia8tx4c.js' }]
     }
   },
-  modules: ['@element-plus/nuxt', '@pinia/nuxt'],
+  modules: ['@element-plus/nuxt', '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt',],
   elementPlus: {
     directives: {
       InfiniteScroll: 'ElInfiniteScroll'
@@ -64,7 +64,7 @@ export default defineNuxtConfig({
 
     plugins: [
       Components({
-        resolvers: [AntDesignVueResolver()]
+        resolvers: [AntDesignVueResolver(), ]
       }),
       prismjs({
         languages: [
